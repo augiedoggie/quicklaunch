@@ -40,7 +40,10 @@ MainListItem::MainListItem(BEntry* entry, int iconSize, bool isFav)
 		status_t result = node_info.GetIcon(fIcon, icon_size(fIconSize));
 		if (result != B_OK) {
 			BMimeType nodeType;
-			nodeType.SetTo("application/x-vnd.Be-elfexecutable");
+			entry_ref ref;
+			if (entry->GetRef(&ref) != B_OK || BMimeType::GuessMimeType(&ref, &nodeType) != B_OK)
+				nodeType.SetTo("application/x-vnd.Be-elfexecutable");
+
 			result = nodeType.GetIcon(fIcon, icon_size(fIconSize));
 			if (result != B_OK)
 				fIcon = NULL;

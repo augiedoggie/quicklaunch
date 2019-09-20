@@ -316,7 +316,7 @@ MainWindow::BuildList()
 				entry_ref* favorite = static_cast<entry_ref*>(settings.fFavoriteList->ItemAt(i));
 				if (!favorite)
 					continue;
-				BEntry entry(favorite);
+				BEntry entry(favorite, true);
 				if (entry.InitCheck() == B_OK)
 					fListView->AddItem(new MainListItem(&entry, fIconHeight, true));
 			}
@@ -338,6 +338,11 @@ MainWindow::BuildList()
 					query.PushOp(B_BEGINS_WITH);
 					query.PushOp(B_AND);
 
+					query.PushAttr("QuickLaunch:Enable");
+					query.PushInt32(1);
+					query.PushOp(B_EQ);
+					query.PushOp(B_OR);
+
 					query.PushAttr("name");
 					query.PushString(predicate, true);
 
@@ -355,9 +360,7 @@ MainWindow::BuildList()
 
 					BEntry entry;
 					BPath path;
-					while (query.GetNextEntry(&entry) == B_OK) {
-						if (!entry.IsFile())
-							continue;
+					while (query.GetNextEntry(&entry, true) == B_OK) {
 
 						if (entry.GetPath(&path) < B_OK) {
 							fprintf(stderr, "could not get path for entry\n");
