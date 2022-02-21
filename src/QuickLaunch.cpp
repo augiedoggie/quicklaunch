@@ -200,6 +200,23 @@ QLApp::MessageReceived(BMessage* message)
 			}
 			break;
 		}
+		case FUZZYSEARCH_CHK:
+		{
+			int32 value;
+			message->FindInt32("be:value", &value);
+
+			if (fSettings.Lock()) {
+				fSettings.SetFuzzySearch(value);
+				fSettings.Unlock();
+			}
+
+			if (!fMainWindow->fListView->IsEmpty()) {
+				fMainWindow->LockLooper();
+				fMainWindow->BuildList();
+				fMainWindow->UnlockLooper();
+			}
+			break;
+		}
 		case IGNORE_CHK:
 		{
 			if (fSettings.fIgnoreList->IsEmpty()) {

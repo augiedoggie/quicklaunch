@@ -41,6 +41,7 @@
 #define SEARCHSTART_CHK	'chst'
 #define SAVESEARCH_CHK	'chss'
 #define SORTFAVS_CHK	'chsf'
+#define FUZZYSEARCH_CHK	'chfz'
 #define IGNORE_CHK		'chig'
 #define ADD_BUT			'addb'
 #define REM_BUT			'remb'
@@ -61,6 +62,7 @@ public:
 	BCheckBox*		fChkSearchStart;
 	BCheckBox*		fChkSaveSearch;
 	BCheckBox*		fChkSortFavorites;
+	BCheckBox*		fChkFuzzySearch;
 	BCheckBox*		fChkIgnore;
 	BButton*		fButRem;
 

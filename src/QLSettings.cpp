@@ -42,6 +42,7 @@ QLSettings::QLSettings()
 	fSearchStart = true;
 	fSaveSearch = false;
 	fSortFavorites = false;
+	fFuzzySearch = false;
 	fSearchTerm = "";
 	fShowIgnore = false;
 	fFavoriteList = new BList();
@@ -92,6 +93,10 @@ QLSettings::QLSettings()
 		int32 sortfavs;
 		if (settings.FindInt32("sort favorites", &sortfavs) == B_OK)
 			fSortFavorites = sortfavs;
+
+		int32 fuzzysearch;
+		if (settings.FindInt32("fuzzy search", &fuzzysearch) == B_OK)
+			fFuzzySearch = fuzzysearch;
 	}
 }
 
@@ -121,6 +126,7 @@ QLSettings::SaveSettings()
 	settings.AddString("searchterm", fSearchTerm);
 	settings.AddInt32("show ignore", fShowIgnore);
 	settings.AddInt32("sort favorites", fSortFavorites);
+	settings.AddInt32("fuzzy search", fFuzzySearch);
 
 	for (int32 i = 0; i < fIgnoreList->CountItems(); i++) {
 		IgnoreListItem* item = dynamic_cast<IgnoreListItem*>(fIgnoreList->ItemAt(i));

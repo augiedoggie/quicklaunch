@@ -305,7 +305,6 @@ MainWindow::QuitRequested()
 void
 MainWindow::BuildList()
 {
-	const char* predicate = GetSearchString();
 	QLSettings& settings = my_app->Settings();
 
 	fListView->MakeEmpty();
@@ -324,6 +323,12 @@ MainWindow::BuildList()
 			BVolumeRoster volumeRoster;
 			BVolume volume;
 			BQuery query;
+			BString predicate(GetSearchString());
+			if (settings.GetFuzzySearch()) {
+				for (int32 index = 1; index < predicate.Length(); index += 2) {
+					predicate.Insert('*', 1, index);
+				}
+			}
 
 			while (volumeRoster.GetNextVolume(&volume) == B_OK) {
 				if (volume.KnowsQuery()) {

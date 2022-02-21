@@ -39,6 +39,7 @@ public:
 	void	SetSearchTerm(BString searchterm) { fSearchTerm = searchterm; };
 	void	SetShowIgnore(int32 ignore) { fShowIgnore = ignore; };
 	void	SetSortFavorites(int32 sortfavs) { fSortFavorites = sortfavs; };
+	void	SetFuzzySearch(int32 fuzzy) { fFuzzySearch = fuzzy; };
 
 	BRect	GetMainWindowFrame() { return fMainWindowFrame; };
 	BRect	GetSetupWindowFrame() { return fSetupWindowFrame; };
@@ -50,6 +51,7 @@ public:
 	BString	GetSearchTerm() { return fSearchTerm; };
 	int32	GetShowIgnore() { return fShowIgnore; };
 	int32	GetSortFavorites() { return fSortFavorites; };
+	int32	GetFuzzySearch() { return fFuzzySearch; };
 
 	void			InitLists();
 	IgnoreListView* IgnoreList() { return fIgnoreList; };
@@ -68,6 +70,7 @@ private:
 	BString	fSearchTerm;
 	int32	fShowIgnore;
 	int32	fSortFavorites;
+	int32	fFuzzySearch;
 
 	BLocker	fLock;
 };

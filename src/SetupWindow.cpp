@@ -68,6 +68,11 @@ SetupWindow::SetupWindow(BRect frame)
 			new BMessage(SORTFAVS_CHK), B_WILL_DRAW | B_NAVIGABLE);
 	fChkSortFavorites->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNSET));
 
+	fChkFuzzySearch = new BCheckBox("FuzzySearchChk",
+	B_TRANSLATE("Use automatic fuzzy searching(ex: s*e*a*r*c*h)"),
+	new BMessage(FUZZYSEARCH_CHK), B_WILL_DRAW | B_NAVIGABLE);
+	fChkFuzzySearch->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNSET));
+
 	fChkIgnore = new BCheckBox("IgnoreChk",
 		B_TRANSLATE("Ignore these files & folders (and their subfolders):"),
 		new BMessage(IGNORE_CHK), B_WILL_DRAW | B_NAVIGABLE);
@@ -91,6 +96,7 @@ SetupWindow::SetupWindow(BRect frame)
 	fChkSearchStart->SetTarget(be_app);
 	fChkSaveSearch->SetTarget(be_app);
 	fChkSortFavorites->SetTarget(be_app);
+	fChkFuzzySearch->SetTarget(be_app);
 	fChkIgnore->SetTarget(be_app);
 
 	// Build the layout
@@ -111,6 +117,7 @@ SetupWindow::SetupWindow(BRect frame)
 			.Add(fChkSearchStart)
 			.Add(fChkSaveSearch)
 			.Add(fChkSortFavorites)
+			.Add(fChkFuzzySearch)
 			.SetInsets(spacing, spacing, spacing, 0)
 			.End()
 		.AddGroup(B_VERTICAL, 0)
@@ -134,6 +141,7 @@ SetupWindow::SetupWindow(BRect frame)
 		fChkSearchStart->SetValue(settings.GetSearchStart());
 		fChkSaveSearch->SetValue(settings.GetSaveSearch());
 		fChkSortFavorites->SetValue(settings.GetSortFavorites());
+		fChkFuzzySearch->SetValue(settings.GetFuzzySearch());
 		fChkIgnore->SetValue(settings.GetShowIgnore());
 
 		settings.Unlock();
