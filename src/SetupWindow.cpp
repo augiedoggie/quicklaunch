@@ -164,7 +164,6 @@ SetupWindow::QuitRequested()
 	if (fOpenPanel->Window()->IsHidden() == false)
 		fOpenPanel->Hide();
 
-	my_app->SetWindowsFeel(B_MODAL_ALL_WINDOW_FEEL);
 	return false;
 }
 

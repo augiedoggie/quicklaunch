@@ -84,7 +84,6 @@ QLApp::MessageReceived(BMessage* message)
 		case SETUP_BUTTON:
 		{
 			if (fSetupWindow->IsHidden()) {
-				SetWindowsFeel(B_NORMAL_WINDOW_FEEL);
 				fSetupWindow->Show();
 			} else
 				fSetupWindow->Hide();
